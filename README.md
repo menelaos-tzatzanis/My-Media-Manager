@@ -8,50 +8,145 @@
 
 ## Overview
 
-MyMediaManager is a Windows desktop application designed to organize personal photo, video and audio collections without requiring a cloud-based media library.
+MyMediaManager is a Windows desktop application designed to bring photos, videos and audio into one organized local media library.
 
-It brings together media browsing, albums, nested organization, tags, favorites, people profiles, assisted face recognition, advanced search, phone import, photo tools, playlists, slideshow, export, backup and library-maintenance tools in one desktop environment.
+Instead of relying only on folders, the application adds flexible organization through albums, nested albums, tags, favorites, people profiles, assisted offline face recognition, advanced search, playlists and other library tools.
 
-A central part of the application is flexibility in how existing files are handled:
+Media can be imported from existing folders, transferred directly from a phone over the local network, organized during import, edited when managed by the application and exported again when needed.
 
-- **Linked media** can remain in their original folders
-- **Managed media** can be copied into the application's own library
-- Existing folder structures can be imported as albums
-- The same media item can belong to multiple albums without requiring a separate physical copy for every album
-- Tags can provide an additional layer of organization independently from folders and albums
+The application supports both:
 
-Core library management, search, face matching and media processing are designed to run locally on the Windows computer.
+- **Linked media**, which remains in its original location
+- **Managed media**, which is stored inside the application's own media library
+
+The goal is to make a large personal media collection easier to organize, find and use without requiring a mandatory cloud-based library.
 
 > **Portfolio showcase:** This public repository presents the application and its interface. The production source code is maintained privately and is not published here.
 
+![MyMediaManager - Media Library](assets/screenshots/01-all-media.png)
+
 ---
 
-## Media Library
+## People & Faces
 
-MyMediaManager provides a visual library for photos, videos and audio files.
+MyMediaManager includes local tools for organizing a photo library around the people who appear in it.
 
-Media can be organized through:
+Users can create person profiles and connect each profile to a normal library tag.
+
+A profile can contain multiple face references taken from different photos, poses and situations.
+
+This allows the People workflow to become part of the normal tagging system rather than existing as a separate isolated feature.
+
+![MyMediaManager - People and Faces](assets/screenshots/03-people-faces.png)
+
+---
+
+## Assisted Offline Face Recognition
+
+Once a person profile has useful reference faces, MyMediaManager can search the local library for possible matches.
+
+Suggestions are presented for review rather than being treated as automatically correct.
+
+The user can:
+
+- Review suggested faces
+- See higher-confidence and possible matches
+- Confirm a match
+- Reject a match
+- Ignore an incorrect suggestion permanently
+- Choose recognition references
+- Search the entire library or selected albums
+
+When a match is confirmed, the linked person tag can be applied to the corresponding photo.
+
+This can make it much faster to build useful person-based tags across a larger photo collection.
+
+![MyMediaManager - Face Recognition Review](assets/screenshots/04-face-recognition.png)
+
+Face recognition is an **assisted organization tool**, not a guarantee of perfect identification.
+
+It may occasionally suggest an incorrect match or miss a person entirely, so final confirmation remains under the user's control.
+
+Recognition is performed against profiles created inside the user's own local library. It is not an Internet identity-search service.
+
+---
+
+## Daphne — Advanced Library Search
+
+Daphne is MyMediaManager's library search assistant.
+
+It provides a more convenient way to combine multiple search conditions instead of manually browsing albums and tags one by one.
+
+Search conditions can include combinations such as:
+
+- Tags
+- Albums
+- Excluded tags
+- Excluded albums
+- Match all conditions
+- Match at least one condition
+- Media type
+- Library state
+- File size
+- Date-related criteria
+- Saved searches
+
+For example, a user can search for:
+
+**Helen + Sofia, but not Alex**
+
+and immediately obtain the matching media.
+
+Search results can then be selected and exported directly.
+
+![MyMediaManager - Daphne Search](assets/screenshots/07-daphne-search.png)
+
+Daphne works with information already stored in the local media library. It is designed as a focused media-search and organization assistant rather than a general-purpose cloud chatbot.
+
+---
+
+## Phone Import
+
+MyMediaManager can receive photos, videos and supported audio directly from a phone through the local network.
+
+The desktop application starts a temporary Phone Import session and provides a QR code that can be opened from a phone connected to the same trusted Wi-Fi network.
+
+The mobile upload workflow can be used to:
+
+- Select files from the phone
+- Upload directly to the desktop library
+- Select an existing album
+- Create a new album before upload
+- Apply existing tags
+- Create new tags
+- Organize imported media before it arrives in the main library
+
+This means a group of vacation photos, for example, can arrive already placed inside the correct album instead of requiring complete organization afterwards.
+
+![MyMediaManager - Phone Import](assets/screenshots/11-phone-import.png)
+
+Phone Import works through the local network and a browser-based upload page.
+
+It is not presented as a separate native mobile application or cloud-storage service.
+
+Sensitive local connection information has been hidden in the public portfolio screenshot.
+
+---
+
+## Albums, Nested Albums & Existing Folder Structures
+
+Albums provide a flexible organizational layer on top of the actual media files.
+
+MyMediaManager supports:
 
 - Albums
 - Nested albums
-- Tags
-- Favorites
-- Media type
-- People profiles
-- Search and filtering
-- Unsorted and missing-media views
+- Media in multiple albums
+- Album search
+- Adding and removing media from albums
+- Importing folders directly as albums
 
-The same item can be associated with multiple albums and tags, allowing the library structure to remain flexible without having to duplicate the file for every category.
-
-![MyMediaManager - All Media](assets/screenshots/01-all-media.png)
-
----
-
-## Import Existing Folders as Albums
-
-Existing folders can be imported directly into the library as albums.
-
-When a folder structure already contains meaningful organization, MyMediaManager can use the folder and subfolder names to create or reuse a corresponding album hierarchy.
+An existing folder structure can be reused instead of being rebuilt manually.
 
 For example:
 
@@ -61,133 +156,40 @@ Vacations 2026
 └── Winter
 ```
 
-can become a matching album structure inside the application.
+can become a corresponding album structure inside MyMediaManager.
 
-This makes it possible to bring an existing media collection into the application without manually recreating every album from the beginning.
+Folder and subfolder names can therefore become useful album names during import.
 
----
-
-## Linked & Managed Media
-
-MyMediaManager supports two different approaches to local files.
-
-### Linked
-
-Linked media remains in its existing location on the computer or connected storage.
-
-This is useful when the user wants to keep an established folder structure and avoid creating another managed copy of the original file.
-
-If a linked file is later moved or becomes unavailable, the application includes missing-media detection and relinking tools.
-
-### Managed
-
-Managed media is stored inside the application's own library structure.
-
-This approach allows the application to manage the stored copy directly and enables workflows such as managed-photo editing and optimized copies.
-
-The Dashboard keeps the two storage modes visible as separate library totals.
+The same media item can also belong to more than one album without requiring a separate physical copy for every album relationship.
 
 ---
 
-## Dashboard & Library Health
+## Tags, Favorites & Flexible Organization
 
-The Dashboard provides an overview of the current library together with maintenance and storage tools.
+Albums are only one way to organize the library.
 
-Available information and actions include:
+Tags provide another independent layer that can be used across different albums and media types.
 
-- Total media
-- Linked and Managed totals
-- Video and audio counts
-- Favorites
-- Missing media
-- Untagged and unsorted media
-- Duplicate information
-- Database size
-- Thumbnail storage
-- Managed-file storage
-- Total library storage
-- Library Health
-- Missing-file checks
-- Relinking
-- EXIF date scanning
-- Orphaned-thumbnail cleanup
+Tags can represent things such as:
 
-![MyMediaManager - Dashboard](assets/screenshots/02-dashboard.png)
+- People
+- Locations
+- Events
+- Themes
+- Categories
+- Personal organization labels
 
----
+Media can also be marked as Favorites for quick access.
 
-## People & Faces
-
-MyMediaManager includes local tools for organizing photos around people.
-
-A person profile can be connected to a tag, allowing confirmed face matches to help apply that person's tag to the corresponding photos.
-
-This turns face matching into a practical organization workflow rather than only a visual face-detection feature.
-
-Profiles can contain multiple reference faces taken from the user's own library.
-
-![MyMediaManager - People and Faces](assets/screenshots/03-people-faces.png)
-
----
-
-## Assisted Offline Face Recognition
-
-Face recognition is designed to assist the user rather than make final decisions automatically.
-
-The application can search the local library for possible matches to an existing person profile and group suggestions by confidence.
-
-The user can then:
-
-- Confirm a suggestion
-- Reject it
-- Ignore it permanently
-- Review possible matches
-- Select recognition references
-- Search the entire library or selected albums
-
-Confirmed matches can apply the person's linked tag to the relevant photo, making the creation of organized people-based collections substantially faster.
-
-![MyMediaManager - Face Recognition Review](assets/screenshots/04-face-recognition.png)
-
-Face matching is **not expected to be perfect**. Suggestions may be incorrect or may miss a person, so the workflow deliberately keeps confirmation under the user's control.
-
-Recognition operates against profiles created inside the user's own library. It is not an Internet identity-search service.
-
----
-
-## Daphne — Library Search Assistant
-
-Daphne provides a focused way to build more advanced searches across the local library.
-
-Search conditions can include combinations such as:
-
-- Specific tags
-- Specific albums
-- Excluded tags
-- Excluded albums
-- Match all conditions
-- Match at least one condition
-- Media type
-- Year
-- File size
-- Library state
-- Saved searches
-
-For example, the user can find media tagged with **Helen** and **Sofia**, while excluding anything tagged with **Alex**.
-
-The complete result set can then be selected or exported directly.
-
-![MyMediaManager - Daphne Search](assets/screenshots/07-daphne-search.png)
-
-Daphne works with the information stored in the local media library. It is intended as a practical search and organization assistant rather than a general-purpose cloud chatbot.
+Together, albums, tags, people profiles and favorites make it possible to organize the same collection in several useful ways without changing the original folder structure every time.
 
 ---
 
 ## Photo Viewer
 
-The integrated viewer keeps the media itself together with useful library information.
+The integrated media viewer keeps the selected photo together with its useful library information and actions.
 
-Depending on the media type and storage mode, the viewer can provide:
+Depending on the selected media and storage mode, the viewer can provide access to:
 
 - Full-size viewing
 - Previous / next navigation
@@ -197,13 +199,14 @@ Depending on the media type and storage mode, the viewer can provide:
 - Full screen
 - Favorite status
 - File information
-- Dimensions and size
+- Image dimensions
+- File size
 - Albums
 - Tags
-- Date management
+- Date tools
 - Rename
 - Copy
-- Managed-photo actions
+- Managed-photo tools
 
 ![MyMediaManager - Photo Viewer](assets/screenshots/05-photo-viewer.png)
 
@@ -211,14 +214,14 @@ Depending on the media type and storage mode, the viewer can provide:
 
 ## Managed Photo Editing
 
-Supported Managed photos can be edited directly through the application.
+Managed photos can be edited directly from inside the application.
 
-Available tools include:
+Available photo tools include:
 
 - Black & white
 - Auto enhance
 - Auto contrast
-- Brightness, contrast and other adjustments
+- Image adjustments
 - Saturation
 - Sharpness
 - Straighten
@@ -229,7 +232,9 @@ Available tools include:
 
 ![MyMediaManager - Photo Editing](assets/screenshots/08-photo-editing.png)
 
-The exact behavior depends on the selected editing operation. Not every editing workflow should be considered non-destructive.
+Editing behavior depends on the selected operation.
+
+The application does not present every editing action as automatically non-destructive.
 
 ---
 
@@ -237,85 +242,113 @@ The exact behavior depends on the selected editing operation. Not every editing 
 
 MyMediaManager can create a separate optimized JPEG copy of a Managed image.
 
-The workflow can use resizing and JPEG quality settings to produce a smaller file while preserving the original item as a separate library entry.
+This makes it possible to keep the original library item while also producing a smaller version for situations where file size matters.
 
-Relevant album and tag relationships can also be carried into the new copy.
+Album and tag relationships can also be carried into the optimized copy.
 
-The example below shows one specific image where a **2.4 MB PNG** produced a **444 KB JPEG** optimized copy.
+In the example shown below, a **2.4 MB PNG** resulted in a **444 KB JPEG** optimized copy.
 
 ![MyMediaManager - Optimized Copy](assets/screenshots/09-optimize-copy.png)
 
-File-size reduction depends on the source image and selected settings; this example is not a guaranteed compression ratio for every file.
+This is one real example from the demonstration library.
 
----
-
-## Phone Import
-
-Photos, videos and audio can be transferred from a phone through a temporary local-network upload page.
-
-The desktop application starts the import session and provides a QR code that can be opened from a phone on the same trusted Wi-Fi network.
-
-Before uploading, the mobile workflow can support organization choices such as:
-
-- Selecting an existing album
-- Creating a new album
-- Selecting existing tags
-- Creating new tags
-- Choosing the media to upload
-- Using supported import-quality options
-
-This means media can arrive in the desktop library already associated with useful organization instead of always being sorted afterwards.
-
-![MyMediaManager - Phone Import](assets/screenshots/11-phone-import.png)
-
-Phone Import operates through the local network and browser. It is not presented as a separate native mobile application or cloud-storage service.
-
-Sensitive local connection information has been hidden in the portfolio screenshot.
-
----
-
-## Audio & Playlists
-
-MyMediaManager also includes audio-library and playlist functionality.
-
-Users can:
-
-- Organize audio files
-- Create playlists
-- Control playlist order
-- Play individual tracks
-- Play a playlist from the beginning
-- Move through playlist items
-- Use ordered or alternative playback modes
-- Export a playlist
-
-When a playlist is exported, numbered filenames can be used to preserve its intended order outside the application.
-
-![MyMediaManager - Audio Playlist](assets/screenshots/06-audio-playlists.png)
+The actual size reduction depends on the source image and selected processing settings.
 
 ---
 
 ## Slideshow
 
-Photos and supported videos can be viewed through the integrated slideshow.
+The integrated slideshow can display library media in a focused full-screen presentation.
 
-Slideshow options include:
+Available options include:
 
-- Configurable media-change interval
-- Current or alternative ordering
+- Configurable slide interval
+- Current-order playback
+- Alternative ordering
 - Repeat from beginning
 - Manual previous / next navigation
 - Full-screen presentation
 
-Audio playback from the application's player can continue while photo slides are displayed. When video playback begins, the audio-player behavior is handled separately to avoid competing playback.
-
 ![MyMediaManager - Slideshow](assets/screenshots/10-slideshow.png)
+
+Audio playback from the application's player can continue while photos are displayed, allowing a photo slideshow to run together with music.
+
+Video playback is handled separately so that competing audio playback can be avoided when necessary.
+
+---
+
+## Audio & Playlists
+
+MyMediaManager is not limited to photos.
+
+Audio files can also be organized and played inside the library.
+
+Playlist functionality includes:
+
+- Creating playlists
+- Adding audio tracks
+- Reordering playlist items
+- Playing an individual track
+- Playing from the beginning
+- Previous / next controls
+- Different playback modes
+- Exporting playlist content
+
+![MyMediaManager - Audio Playlist](assets/screenshots/06-audio-playlists.png)
+
+This allows photos, videos and audio to remain part of the same broader personal media library rather than requiring a completely separate organizational system.
+
+---
+
+## Linked & Managed Media
+
+MyMediaManager supports two different approaches to local files.
+
+### Linked Media
+
+Linked media remains in its existing location on the computer or connected storage.
+
+The application stores the library relationship without needing to create another Managed copy of the original file.
+
+This can be useful for users who already have an established folder structure or large media collection.
+
+If a Linked file is later moved or becomes unavailable, MyMediaManager includes missing-media detection and relinking tools.
+
+### Managed Media
+
+Managed media is copied into the application's own local library storage.
+
+This gives MyMediaManager direct control over the stored copy and enables workflows such as:
+
+- Managed-photo editing
+- Optimized copies
+- Managed backup
+- Library-controlled storage
+
+Linked and Managed items can coexist in the same library.
+
+---
+
+## Importing Media
+
+Media can enter the library through several workflows.
+
+These include:
+
+- Adding individual folders
+- Importing a folder as an album
+- Importing nested folder structures
+- Phone Import
+- Managed import
+- Linked import
+
+When appropriate, existing organization can therefore be preserved instead of being recreated manually.
 
 ---
 
 ## Export & Sharing
 
-The application includes several ways to take selected media back out of the library.
+Organizing media inside MyMediaManager does not mean trapping it inside the application.
 
 Depending on the workflow, users can export:
 
@@ -324,18 +357,18 @@ Depending on the workflow, users can export:
 - Album-related selections
 - Person-profile photos
 - Playlist content
-- Files to a normal folder
+- Files to normal folders
 - ZIP packages
 
-Windows sharing functionality is also supported for relevant workflows.
+Windows sharing functionality is also available in supported workflows.
 
-The purpose is to keep organization inside the application without trapping the media inside it.
+This makes the library useful both for long-term organization and for quickly collecting a specific group of files for use elsewhere.
 
 ---
 
 ## Backup & Restore
 
-MyMediaManager includes local Backup and Restore functionality.
+MyMediaManager includes local Backup and Restore tools.
 
 A library backup can include:
 
@@ -344,9 +377,48 @@ A library backup can include:
 - Thumbnails
 - Backup metadata / manifest
 
-Restore includes validation and confirmation before replacing the active library.
+Restore operations include validation and confirmation before replacing the active library.
 
-Because **Linked** media remains outside the Managed library, the original external Linked files are not automatically copied into the application backup. Their library references are retained, but the user remains responsible for backing up the original files themselves.
+Because **Linked media** remains outside the application's Managed storage, the original external Linked files are not automatically copied into a MyMediaManager backup.
+
+The user remains responsible for separately backing up those original external files.
+
+---
+
+## Dashboard & Library Health
+
+The Dashboard provides an overview of the current library together with maintenance and storage information.
+
+It can display information such as:
+
+- Total media
+- Linked media
+- Managed media
+- Videos
+- Audio
+- Favorites
+- Missing media
+- Untagged media
+- Unsorted media
+- Duplicate information
+- Database size
+- Thumbnail storage
+- Managed-file storage
+- Total local library storage
+
+Maintenance tools include:
+
+- Library Health
+- Check Missing
+- Relink Folder
+- Scan EXIF Dates
+- Clean orphaned thumbnails
+- Library information
+- Library statistics
+
+![MyMediaManager - Dashboard](assets/screenshots/02-dashboard.png)
+
+These tools are intended to help the user understand and maintain the state of a larger local media collection instead of treating the library as a black box.
 
 ---
 
@@ -354,87 +426,120 @@ Because **Linked** media remains outside the Managed library, the original exter
 
 MyMediaManager is designed around local media ownership and local processing.
 
-Core application functionality does not depend on:
+Core application functionality does not require:
 
-- A cloud media database
 - A mandatory cloud account
-- A remote recognition service
+- A remote media database
+- A remote face-recognition service
+- Browser-based hosting
 - Continuous Internet connectivity
 
-Normal library data is stored locally.
+Normal library information is stored locally on the Windows computer.
 
-Face detection and matching operate locally using the application's Windows and bundled recognition components.
+Face detection and face matching are performed locally using the application's local recognition components.
 
-Some explicitly selected sharing workflows may open or use external services, but these are separate user-initiated actions rather than a requirement for normal library operation.
+Phone Import also transfers media through the local network rather than requiring a cloud media account.
+
+Some explicitly selected sharing actions may open or use external services, but those actions are separate from normal library operation.
+
+---
+
+## Performance & Large Libraries
+
+The application includes implementation strategies intended to keep larger libraries practical.
+
+These include mechanisms such as:
+
+- Bounded database queries
+- Paging
+- Virtualized media views
+- On-demand operations
+- Controlled background work
+- Thumbnail caching
+- Bounded recognition processing
+
+Development and regression testing also cover scenarios involving large media collections and long-running library operations.
+
+The intention is to keep browsing and organization usable as the library grows without continuously scanning or processing everything unnecessarily.
+
+---
+
+## Data Safety & Reliability
+
+Several parts of the application are designed specifically around safer handling of local media libraries.
+
+Examples include:
+
+- Missing-media detection
+- Relinking Linked files
+- Managed / Linked separation
+- Backup validation
+- Restore validation
+- Thumbnail cleanup
+- Import validation
+- Recovery-related handling
+- Guarded bulk operations
+
+The development approach includes regression testing around imports, exports, backup, restore, bulk operations, People / Faces, recognition workflows and larger libraries.
 
 ---
 
 ## Technology
 
-MyMediaManager is built using:
+MyMediaManager is built using technologies including:
 
 - **Tauri 2**
 - **React**
 - **TypeScript**
 - **Rust**
 - **SQLite**
-- **ONNX Runtime**
-- **Windows Media Face Detection**
+- Local face-recognition components
 - Local image-processing tools
-- Local video/media-processing tools
+- Local media-processing tools
 - Windows desktop packaging with NSIS
 
-The Rust backend handles database operations, local files, imports, exports, backup and restore, media processing, phone-import services and other native functionality.
+The Rust backend handles areas such as:
+
+- Database operations
+- Local file management
+- Imports
+- Exports
+- Backup and Restore
+- Media processing
+- Phone Import services
+- Native desktop functionality
 
 The interface is implemented with React and TypeScript inside the Tauri desktop environment.
 
 ---
 
-## Performance & Reliability Approach
+## Product Philosophy
 
-The application includes mechanisms intended to keep larger media libraries practical, including bounded queries, paging, virtualization and on-demand processing in relevant areas.
+MyMediaManager is designed around a simple idea:
 
-Development also includes extensive frontend and Rust regression-test coverage around areas such as:
+**a personal media collection should remain easy to organize, search, view and export without requiring the user to surrender control of the library to a mandatory cloud platform.**
 
-- Imports
-- Albums and tags
-- Linked and Managed media
-- People / Faces
-- Recognition workflows
-- Backup and Restore
-- Bulk operations
-- Phone Import
-- Missing media
-- Thumbnails
-- Large-library behavior
+The application connects several everyday workflows:
 
-These implementation choices describe the application's development approach and are not intended as benchmark claims against other media-management products.
+**import → organize → recognize → find → view → edit → export**
 
----
+while keeping the library local.
 
-## Product Direction
-
-MyMediaManager is intended to provide more structure than browsing media directly through folders, while keeping the user's files and library under local control.
-
-The goal is to connect several everyday media workflows:
-
-**import → organize → find → review → edit → export**
-
-without requiring the user to move every part of their personal collection into a mandatory cloud ecosystem.
-
-It is designed as a broader media organizer rather than only a photo viewer, combining photos, videos and audio inside the same library.
+It is intended as a broader personal media organizer rather than only a photo viewer, with photos, videos and audio available inside the same application.
 
 ---
 
 ## Demo & Privacy Note
 
-The person profiles and principal photo-demo material shown in this repository were created specifically for the portfolio presentation and use fictional people.
+The principal photo-demo material and person profiles visible in this repository were created specifically for the portfolio presentation and use fictional people and demonstration content.
 
-Audio titles shown in the playlist screenshot were also changed for presentation purposes.
+The names **Helen**, **John**, **Sofia** and **Alex** are demonstration profile names.
 
-Sensitive Phone Import connection information has been removed from the public screenshot.
+Audio titles shown in the public playlist screenshot were changed for presentation purposes.
 
-Some interface information, including the application author's contact information where visible, is genuine.
+Sensitive Phone Import connection information has been hidden from the public screenshot.
+
+No real private media library or personal backup data is included in this repository.
 
 ---
 
@@ -442,9 +547,11 @@ Some interface information, including the application author's contact informati
 
 The full production source code of MyMediaManager is maintained privately.
 
-This repository is intended solely as a **product showcase and portfolio presentation**, containing documentation and screenshots demonstrating the application's functionality.
+This public repository is intended solely as a **product showcase and portfolio presentation**.
 
-The complete production source code, database files, bundled binaries, recognition models and private application data are not included in this public repository.
+It contains documentation and visual material demonstrating the application's functionality.
+
+The complete production source code, application database, private media library, bundled recognition assets and internal application files are not published here.
 
 ---
 
@@ -452,7 +559,7 @@ The complete production source code, database files, bundled binaries, recogniti
 
 **Functional Windows desktop software project.**
 
-MyMediaManager is a working media-management application and continues to receive product, usability and reliability improvements.
+MyMediaManager is a working application and continues to receive usability, reliability and product improvements.
 
 ---
 
